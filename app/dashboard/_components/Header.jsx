@@ -10,10 +10,10 @@ export default function Header(){
     })
     return (
         <div className='flex p-4 items-center justify-between bg-secondary shadow-sm'>
-          <img src={'/logo.svg'} width={60} height={60} alt='logo' />
+          <img src={'/logo.svg'} width={40} height={40} alt='logo' />
           <ul className='hidden md:flex gap-6 '>
             <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer 
-            ${path=='/dashboard' && 'font-bold text-primary'}`}>
+            ${path=='/dashboard' && 'font-bold text-blue-700'}`}>
             
             Dashboard</li>
             <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer
