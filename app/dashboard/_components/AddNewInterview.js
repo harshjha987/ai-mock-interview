@@ -20,6 +20,7 @@ import { uuid } from "drizzle-orm/pg-core";
 import { v4 as uuidv4 } from 'uuid';
 import { useUser } from "@clerk/nextjs";
 import moment from "moment/moment";
+import { useRouter } from "next/navigation";
   
 
 export default function AddNewInterview(){
@@ -30,6 +31,8 @@ export default function AddNewInterview(){
     const[loading,setLoading] = useState(false)
     const[jsonResponse , setJsonResponse] = useState([]);
     const {user} = useUser();
+    const router = useRouter();
+
     const onSubmit = async(event)=>{
         setLoading(true);
         event.preventDefault();
@@ -54,6 +57,7 @@ export default function AddNewInterview(){
             console.log("Id : ", response)
             if(response){
                 setOpenDialog(false)
+                router.push('/dashboard/interview/+response[0]?.mockId')
             }
         }else{
             console.log("Error");
