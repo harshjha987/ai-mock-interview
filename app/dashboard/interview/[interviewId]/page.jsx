@@ -1,5 +1,5 @@
 'use client'
-
+import Link from 'next/link'
 import React, { useEffect, useState } from "react";
 import { MockInterview } from "../../../../utils/schema";
 import Webcam from "react-webcam";
@@ -9,7 +9,7 @@ import { Button } from "../../../../components/ui/button";
 import { eq } from "drizzle-orm";
 
 export default function Interview({params}){
-    const [interviewData,setInterviewData] = useState();
+    const [interviewData,setInterviewData] = useState("");
     const[webCamEnabled,setWebCamEnabled] = useState(false)
 
     useEffect(()=>{
@@ -60,7 +60,10 @@ export default function Interview({params}){
 
             </div>
             <div className="flex justify-end items-end">
+            <Link href = {'/dashboard/interview/'+params.interviewId+'/start'}>
             <Button >Start Interview</Button>
+            </Link>
+           
             </div>
             
             
