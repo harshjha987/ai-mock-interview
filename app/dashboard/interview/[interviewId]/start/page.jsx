@@ -1,10 +1,12 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React, { act, useEffect, useState } from "react";
 import { db } from "../../../../../utils/db";
 import { eq } from "drizzle-orm";
 import { MockInterview } from "../../../../../utils/schema";
 import QuestionSection from "./_components/QuestionSection";
 import RecordAnswer from "./_components/RecordAnswer";
+import { Button } from "../../../../../components/ui/button";
+import Link from "next/link";
 
 export default function startInterview({params}){
     const [interviewdata,setInterviewData] = useState("");
@@ -30,7 +32,22 @@ export default function startInterview({params}){
                      interviewquestions = {interviewquestions}
                         activeQuestionIndex = {activeQuestionIndex}
                      />
-                     <RecordAnswer />
+                     <RecordAnswer interviewquestions = {interviewquestions}
+                        activeQuestionIndex = {activeQuestionIndex}
+                        interviewData = {interviewdata} />
+            </div>
+            <div className="flex justify-end gap-6">
+                {activeQuestionIndex > 0 &&<Button
+                onClick = {()=> setActiveQuestionIndex(activeQuestionIndex-1)}
+                >Previous Question</Button>}
+                {activeQuestionIndex != interviewquestions?.length-1 && <Button
+                onClick = {()=>setActiveQuestionIndex(activeQuestionIndex + 1)}>
+                
+                Next Question</Button>}
+                <Link href={'/dashboard/interview/'+interviewdata?.mockId+"/feedback"}>
+                {activeQuestionIndex == interviewquestions?.length-1 &&<Button>End Interview</Button>}
+                </Link>
+                
             </div>
         </div>
     )
