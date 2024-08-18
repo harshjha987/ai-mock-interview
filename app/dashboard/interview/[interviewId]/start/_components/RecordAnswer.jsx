@@ -23,6 +23,7 @@ export default function RecordAnswer({interviewquestions, activeQuestionIndex,in
         results,
         startSpeechToText,
         stopSpeechToText,
+        setResults
       } = useSpeechToText({
         continuous: true,
         useLegacyResults: false
@@ -76,8 +77,10 @@ export default function RecordAnswer({interviewquestions, activeQuestionIndex,in
             })
             if(resp){
                 toast('User Answer Recorded Succesfully')
+                setUserAnswer("");
+                setResults([]);
             }
-            setUserAnswer("");
+          
             setLoading(false)
 
 
