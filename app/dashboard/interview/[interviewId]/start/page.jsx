@@ -9,7 +9,7 @@ import { Button } from "../../../../../components/ui/button";
 import Link from "next/link";
 
 export default function startInterview({params}){
-    const [interviewdata,setInterviewData] = useState("");
+    const [interviewData,setInterviewData] = useState("");
     const [interviewquestions,setInterviewQuestions] = useState("");
     const[activeQuestionIndex,setActiveQuestionIndex] = useState(0);
 
@@ -21,7 +21,7 @@ export default function startInterview({params}){
     const getInterviewDetails =async ()=>{
         const result = await db.select().from(MockInterview)
         .where(eq(MockInterview.mockId,params.interviewId));
-       const jsonMockResp = JSON.parse(result[0].jsonMockResp);
+       const jsonMockResp = (JSON.parse(result[0].jsonMockResp));
        setInterviewQuestions(jsonMockResp);
        setInterviewData(result[0])
     }
@@ -34,7 +34,7 @@ export default function startInterview({params}){
                      />
                      <RecordAnswer interviewquestions = {interviewquestions}
                         activeQuestionIndex = {activeQuestionIndex}
-                        interviewData = {interviewdata} />
+                        interviewData = {interviewData} />
             </div>
             <div className="flex justify-end gap-6">
                 {activeQuestionIndex > 0 &&<Button
@@ -44,7 +44,7 @@ export default function startInterview({params}){
                 onClick = {()=>setActiveQuestionIndex(activeQuestionIndex + 1)}>
                 
                 Next Question</Button>}
-                <Link href={'/dashboard/interview/'+interviewdata?.mockId+"/feedback"}>
+                <Link href={'/dashboard/interview/'+interviewData?.mockId+"/feedback"}>
                 {activeQuestionIndex == interviewquestions?.length-1 &&<Button>End Interview</Button>}
                 </Link>
                 

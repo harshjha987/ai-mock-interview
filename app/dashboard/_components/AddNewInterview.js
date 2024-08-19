@@ -25,9 +25,9 @@ import { useRouter } from "next/navigation";
 
 export default function AddNewInterview(){
     const [openDialog,setOpenDialog] = useState(false);
-    const[jobPosition,setJobPosition] = useState();
-    const[jobDescription,setJobDescription] = useState();
-    const[jobExperience,setJobExperience] = useState();
+    const[jobPosition,setJobPosition] = useState("");
+    const[jobDescription,setJobDescription] = useState("");
+    const[jobExperience,setJobExperience] = useState("");
     const[loading,setLoading] = useState(false)
     const[jsonResponse , setJsonResponse] = useState([]);
     const {user} = useUser();
@@ -40,7 +40,7 @@ export default function AddNewInterview(){
         const InputPrompt = "Job Position :"+jobPosition+" , Job Description : "+jobDescription+", Years of Experience : "+process.env.NEXT_PUBLIC_INTERVIEW_QUESTION_COUNT+" ,Depending on Job Position , Job Description and Years of Experience give us 5 interview question along with answers in Json format,Give us question and answer field on json"
             const result = await chatSession.sendMessage(InputPrompt);
             const MockJsonResp = (result.response.text()).replace('```json',"").replace('```',"")
-            console.log(JSON.parse(MockJsonResp));
+          
             setJsonResponse(MockJsonResp);
             if(MockJsonResp){
 
